@@ -44,6 +44,7 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
 
+
     // para carregar imagem de url para imageview
     implementation "com.squareup.picasso:picasso:$picassoVersion"
 

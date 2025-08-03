@@ -39,6 +39,7 @@ public class VerPokemonActivity extends AppCompatActivity {
                 (newV) -> Picasso.get().load(newV).into(binding.imageView));
         vm.getHeight().observe(this, (altura) -> binding.tvAltura.setText("" + altura));
         vm.getWeight().observe(this, (peso) -> binding.tvPeso.setText("" + peso));
+        vm.getEvolution().observe(this, (cadeia) -> binding.tvEvolucao.setText("" + "Evolução: " + String.join(" → ", cadeia)));
 
         // Aqui, eu recebo da activity anterior o nome do pokemon
         Intent intent = getIntent();
