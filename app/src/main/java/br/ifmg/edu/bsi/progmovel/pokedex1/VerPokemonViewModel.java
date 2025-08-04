@@ -24,7 +24,7 @@ public class VerPokemonViewModel extends ViewModel {
     private MutableLiveData<String> urlImagem;
     private MutableLiveData<Integer> height;
     private MutableLiveData<Integer> weight;
-    private MutableLiveData<ArrayList<String>> evolution = new MutableLiveData<>(new ArrayList<>()); // Inicialização corrigida
+    private MutableLiveData<ArrayList<String>> evolution = new MutableLiveData<>(new ArrayList<>()); // inicialização da cadeia de evolução
 
     public static ViewModelInitializer<VerPokemonViewModel> initializer = new ViewModelInitializer<>(
             VerPokemonViewModel.class,
@@ -49,10 +49,9 @@ public class VerPokemonViewModel extends ViewModel {
                 height.postValue(p.height);
                 weight.postValue(p.weight);
                 urlImagem.postValue(p.sprites.other.officialArtwork.front_default);
-                ArrayList<String> cadeia = app.getPokemonRepo().searchEvo(nomePokemon);
+                ArrayList<String> cadeia = app.getPokemonRepo().searchEvo(nomePokemon); // carregar o pokemón
                 evolution.postValue(cadeia);
             } catch (IOException e) {
-                // Aumentando a visibilidade da exceção para facilitar o debug
                 e.printStackTrace();
                 throw new RuntimeException("Erro ao carregar o Pokemon: " + nomePokemon, e);
             } finally {
@@ -80,7 +79,7 @@ public class VerPokemonViewModel extends ViewModel {
     public LiveData<Integer> getWeight() {
         return weight;
     }
-    public LiveData<ArrayList<String>> getEvolution(){
+    public LiveData<ArrayList<String>> getEvolution(){ // liveData de array da evolução
         return evolution;
     }
 }

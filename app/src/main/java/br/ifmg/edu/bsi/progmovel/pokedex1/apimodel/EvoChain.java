@@ -9,13 +9,9 @@ public class EvoChain {
     public static class Species{
         public String name;
     }
-    public static class ChainLink {
+    public static class ChainLink { // chainlink é o  que procuro no pokemón.co
         public Species species;
-
-        // A PokeAPI usa "evolves_to" para a lista de evoluções.
-        // A anotação @SerializedName é necessária para que o GSON
-        // faça o mapeamento corretamente.
-        @SerializedName("evolves_to")
+        @SerializedName("evolves_to") // gpt disse que é necessário essa tag por conta do nomes esperado lá do pokemón.co
         public ArrayList<ChainLink> evolvesTo;
     }
 }

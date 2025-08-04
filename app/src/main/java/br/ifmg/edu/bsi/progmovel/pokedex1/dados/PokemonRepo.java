@@ -22,15 +22,15 @@ public class PokemonRepo {
 
     public ArrayList<String> searchEvo(String nome) throws IOException{
         Species species = api.getPokemonSpecies(nome).execute().body(); // vai puxar o id da url e chamar o executador
-        if(species == null || species.evolutionChain == null || species.evolutionChain.url == null){
+        if(species == null || species.evolutionChain == null || species.evolutionChain.url == null){ // sem validação o app corre risco de crashar (experiência própria)
             return new ArrayList<>();
         }
-        String url = species.evolutionChain.url;
+        String url = species.evolutionChain.url; // separa a url para buscar a id da cadeia de evolução do pokemón
         String[] parts = url.split("/");
-        int id = Integer.parseInt(parts[parts.length - 3]);
+        int id = Integer.parseInt(parts[parts.length - 1]);
 
         EvoChain evolutions = api.getEvolutionChain(id).execute().body();
-        if(evolutions == null || evolutions.chain == null){
+        if(evolutions == null || evolutions.chain == null){ // sem validação o app corre risco de crashar (experiência própria)
             return new ArrayList<>();
         }
         ArrayList<String> pokemons = new ArrayList<>(); // retorna um array dos pokemons da cadeia de evolução
@@ -43,8 +43,8 @@ public class PokemonRepo {
         return p;
     }
 
-    public void addEvo(EvoChain.ChainLink link, ArrayList<String> pokemon){
-        pokemon.add(link.species.name);
+    public void addEvo(EvoChain.ChainLink link, ArrayList<String> pokemon){ // o método searchEvo espera um array, aqui add a cadeia de evolução para adicionar no array
+        pokemon.add(link.species.name); // se a cadeia existir
         if (link.evolvesTo != null) {
             for (EvoChain.ChainLink i: link.evolvesTo) {
                 addEvo(i, pokemon);
